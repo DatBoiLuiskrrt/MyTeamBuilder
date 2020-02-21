@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, {useState} from 'react';
+import Notes from "../src/Components/Notes"
+import NoteForm from "../src/Components/NoteForm";
 function App() {
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: "El Pirata de Culiacan",
+      body:
+        "A mi el Mencho me pela la verga ",
+        email: "piratita69@gmail.com",
+    }
+  ]);
+  const addNewNote = note => {
+    const newNote = {
+      id: Date.now(),
+      title: note.title,
+      body: note.body,
+      email: note.email,
+      ocupacion: note.ocupacion
+    };
+    setNotes([...notes, newNote]);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Cartel de Sinaloa</h1>
+      <h1>Add a new Member</h1>
+      <NoteForm addNewNote={addNewNote} />
+      <Notes notes={notes} />
     </div>
   );
 }
